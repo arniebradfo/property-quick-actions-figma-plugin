@@ -1,0 +1,28 @@
+{
+	"name": "Property Quick Commands",
+	"id": "1155321899140991523",
+	"api": "1.0.0",
+	"main": "code.js",
+	"editorType": ["figma"],
+	"menu": [
+		{
+			"name": "Auto Layout",
+			"menu": [
+				{ "name": "Direction: Vertical", "command": "autoLayoutDirectionVertical" },
+				{ "name": "Direction: Horizontal", "command": "autoLayoutDirectionHorizontal" },
+				{ "separator": true },
+				{ "name": "Spacing Mode: Space between", "command": "autoLayoutSpacingModeSpaceBetween" },
+				{ "name": "Spacing Mode: Packed", "command": "autoLayoutSpacingModePacked" },
+				{ "separator": true },
+				{ "name": "Strokes: Excluded", "command": "autoLayoutStrokesExcluded" },
+				{ "name": "Strokes: Included", "command": "autoLayoutStrokesIncluded" },
+        { "separator": true },
+				{ "name": "Canvas Stacking: Last on top", "command": "autoLayoutCanvasStackingLast" },
+				{ "name": "Canvas Stacking: First on top", "command": "autoLayoutCanvasStackingFirst" },
+        { "separator": true },
+				{ "name": "Text Baseline Alignment: Toggle On/Off", "command": "autoLayoutTextBaselineAlignmentToggle" },
+        { "separator": true }
+      ]
+		}
+	]
+}
