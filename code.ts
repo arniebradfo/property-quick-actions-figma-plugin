@@ -8,11 +8,11 @@ figma.on('run', (event) => {
 
 // Auto Layout /////////////////////
 
-const autoLayoutDirectionVertical: Cmd = (node) => {
-	if ('layoutMode' in node) node.layoutMode = 'VERTICAL';
-};
-const autoLayoutDirectionHorizontal: Cmd = (node) => {
-	if ('layoutMode' in node) node.layoutMode = 'HORIZONTAL';
+const autoLayoutDirectionToggle: Cmd = (node) => {
+	if ('layoutMode' in node) {
+		if (node.layoutMode === 'VERTICAL') node.layoutMode = 'HORIZONTAL';
+		else node.layoutMode = 'VERTICAL';
+	}
 };
 const autoLayoutSpacingModeSpaceBetween: Cmd = (node) => {
 	if ('primaryAxisAlignItems' in node) node.primaryAxisAlignItems = 'SPACE_BETWEEN';
@@ -39,13 +39,13 @@ const autoLayoutTextBaselineAlignmentToggle: Cmd = (node) => {
 	if ('layoutMode' in node && node.layoutMode === 'HORIZONTAL') {
 		if (node.counterAxisAlignItems !== 'BASELINE') {
 			node.counterAxisAlignItems = 'BASELINE';
-			figma.notify('Text Baseline Alignment: On');
+			figma.notify('Auto Layout > Text Baseline Alignment: On');
 		} else {
 			// node.counterAxisAlignItems = 'CENTER';
-			figma.notify('Text Baseline Alignment: Off');
+			figma.notify('Auto Layout > Text Baseline Alignment: Off');
 		}
 	} else {
-		figma.notify('Only applicable for horizontal layout');
+		figma.notify('Auto Layout > Text Baseline Alignment: Only applicable for horizontal layout');
 	}
 };
 
@@ -54,8 +54,7 @@ const autoLayoutTextBaselineAlignmentToggle: Cmd = (node) => {
 type Cmd = (node: SceneNode) => void;
 
 const commandMap = {
-	autoLayoutDirectionVertical,
-	autoLayoutDirectionHorizontal,
+	autoLayoutDirectionToggle,
 	autoLayoutSpacingModeSpaceBetween,
 	autoLayoutSpacingModePacked,
 	autoLayoutStrokesExcluded,
