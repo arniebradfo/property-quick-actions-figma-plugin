@@ -10,10 +10,14 @@ figma.on('run', (event: RunEvent) => {
 
 figma.parameters.on('input', ({ parameters, key, query, result }: ParameterInputEvent) => {
 	console.log({ parameters, key, query, result });
-	const options = optionsMap[key];
-	if (options == null) return; // assume "allowFreeform": true
-	const suggestions = typeof options === 'function' ? options(query) : searchSuggestions(query, options);
-	result.setSuggestions(suggestions);
+	const suggest = suggestionsMap[key];
+	if (suggest == null) return; // assume "allowFreeform": true
+	const suggestions = typeof suggest === 'function' ? suggest(query) : searchSuggestions(query, suggest);
+	if (typeof suggestions === 'string') {
+		// if (query === '') return; // no input, no error // but sets loading state...
+		result.setError(suggestions);
+	}
+	else result.setSuggestions(suggestions);
 });
 
 // Auto Layout /////////////////////
@@ -25,13 +29,8 @@ const autoLayoutDirectionToggle: Command = (node) => {
 	}
 };
 
-// abstract setNumericValue(node: SceneNode, numericProperty:string, value:string)
-const autoLayoutSpacingBetweenItems: Command<{ pixels: string }> = (node, parameters) => {
-	if ('itemSpacing' in node) {
-		const pixels = parseFloat(parameters.pixels);
-		if (!isNaN(pixels)) node.itemSpacing = pixels;
-		else figma.notify('Error');
-	}
+const autoLayoutSpacingBetweenItems: Command<{ pixels: string }> = (node, { pixels }) => {
+	if ('itemSpacing' in node) setNumericValue(node, 'itemSpacing', pixels);
 };
 
 const autoLayoutSpacingModeSpaceBetween: Command = (node) => {
@@ -88,26 +87,37 @@ const commandMap = {
 	autoLayoutTextBaselineAlignmentToggle,
 };
 
+// Suggestions Map ///////////////////////
+
 type GetSuggestions = (query?: string, options?: string[]) => string[];
 const searchSuggestions: GetSuggestions = (query = '', options = []) => {
 	// TODO: fuzzy find
 	return options.filter((s) => s.includes(query));
 };
 
-type CreateSuggestions = (query?: string) => string[];
+type CreateSuggestions = (query?: string) => string[] | string;
 
 const validateInt: CreateSuggestions = (query = '') => {
 	const int = parseInt(query);
-	if (isNaN(int)) return [];
+	if (isNaN(int)) return 'Must be an Integer';
 	else return [int.toString()];
 };
 const validateFloat: CreateSuggestions = (query = '') => {
 	const float = parseFloat(query);
-	if (isNaN(float)) return [];
+	if (isNaN(float)) return 'Must be a Number';
 	else return [float.toString()];
 };
 
-const optionsMap: Record<string, string[] | CreateSuggestions | undefined> = {
+const suggestionsMap: Record<string, string[] | CreateSuggestions | undefined> = {
 	pixels: validateFloat,
 	example: ['put', 'suggestions', 'here'],
+};
+
+// UTILS ///////////////////////
+const setNumericValue = <Node extends SceneNode>(node: Node, numericProperty: keyof Node, value: string) => {
+	if (numericProperty in node) {
+		const pixels = parseFloat(value);
+		if (!isNaN(pixels)) (node[numericProperty] as number) = pixels;
+		else figma.notify('Error');
+	}
 };
