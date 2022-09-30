@@ -8,16 +8,47 @@
 		{
 			"name": "Auto Layout",
 			"menu": [
-				{ "name": "Direction: Toggle Vertical/Horizontal", "command": "autoLayoutDirectionToggle" },
+				{
+					"name": "Direction: Vertical/Horizontal",
+					"command": "autoLayoutDirectionToggle"
+				},
+				{
+					"name": "Spacing between items",
+					"command": "autoLayoutSpacingBetweenItems",
+					"parameters": [
+						{
+							"name": "Pixels",
+							"key": "pixels"
+						}
+					]
+				},
 				{ "separator": true },
-				{ "name": "Spacing Mode: Space between", "command": "autoLayoutSpacingModeSpaceBetween" },
-				{ "name": "Spacing Mode: Packed", "command": "autoLayoutSpacingModePacked" },
+				{
+					"name": "Spacing Mode: Space between",
+					"command": "autoLayoutSpacingModeSpaceBetween"
+				},
+				{
+					"name": "Spacing Mode: Packed",
+					"command": "autoLayoutSpacingModePacked"
+				},
 				{ "separator": true },
-				{ "name": "Strokes: Excluded", "command": "autoLayoutStrokesExcluded" },
-				{ "name": "Strokes: Included", "command": "autoLayoutStrokesIncluded" },
+				{
+					"name": "Strokes: Excluded",
+					"command": "autoLayoutStrokesExcluded"
+				},
+				{
+					"name": "Strokes: Included",
+					"command": "autoLayoutStrokesIncluded"
+				},
 				{ "separator": true },
-				{ "name": "Canvas Stacking: Last on top", "command": "autoLayoutCanvasStackingLast" },
-				{ "name": "Canvas Stacking: First on top", "command": "autoLayoutCanvasStackingFirst" },
+				{
+					"name": "Canvas Stacking: Last on top",
+					"command": "autoLayoutCanvasStackingLast"
+				},
+				{
+					"name": "Canvas Stacking: First on top",
+					"command": "autoLayoutCanvasStackingFirst"
+				},
 				{ "separator": true },
 				{
 					"name": "Text Baseline Alignment: Toggle On/Off",
