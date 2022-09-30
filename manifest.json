@@ -2,7 +2,7 @@
 	"name": "Property Quick Actions",
 	"id": "1155321899140991523",
 	"api": "1.0.0",
-	"main": "code.js",
+	"main": "dist/main.js",
 	"editorType": ["figma"],
 	"menu": [
 		{

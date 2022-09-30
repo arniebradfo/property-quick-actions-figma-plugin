@@ -1,3 +1,5 @@
+import { setNumericValue } from "./utils";
+
 figma.on('run', (event: RunEvent) => {
 	console.log(figma.currentPage.selection[0]);
 
@@ -113,11 +115,4 @@ const suggestionsMap: Record<string, string[] | CreateSuggestions | undefined> =
 	example: ['put', 'suggestions', 'here'],
 };
 
-// UTILS ///////////////////////
-const setNumericValue = <Node extends SceneNode>(node: Node, numericProperty: keyof Node, value: string) => {
-	if (numericProperty in node) {
-		const pixels = parseFloat(value);
-		if (!isNaN(pixels)) (node[numericProperty] as number) = pixels;
-		else figma.notify('Error');
-	}
-};
+
