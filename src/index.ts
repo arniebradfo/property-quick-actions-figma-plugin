@@ -1,13 +1,10 @@
 import {
 	autoLayoutDirectionToggle,
 	autoLayoutSpacingBetweenItems,
-	autoLayoutSpacingModeSpaceBetween,
-	autoLayoutSpacingModePacked,
-	autoLayoutStrokesExcluded,
-	autoLayoutStrokesIncluded,
-	autoLayoutCanvasStackingLast,
-	autoLayoutCanvasStackingFirst,
 	autoLayoutTextBaselineAlignmentToggle,
+	autoLayoutSpacingModeToggle,
+	autoLayoutCanvasStackingToggle,
+	autoLayoutStrokesToggle,
 } from './commands/auto-layout';
 import { searchSuggestions, validateFloat } from './utils';
 
@@ -33,14 +30,11 @@ figma.parameters.on('input', ({ parameters, key, query, result }: ParameterInput
 });
 
 const commandMap = {
-	autoLayoutDirectionToggle,
 	autoLayoutSpacingBetweenItems,
-	autoLayoutSpacingModeSpaceBetween,
-	autoLayoutSpacingModePacked,
-	autoLayoutStrokesExcluded,
-	autoLayoutStrokesIncluded,
-	autoLayoutCanvasStackingLast,
-	autoLayoutCanvasStackingFirst,
+	autoLayoutDirectionToggle,
+	autoLayoutSpacingModeToggle,
+	autoLayoutStrokesToggle,
+	autoLayoutCanvasStackingToggle,
 	autoLayoutTextBaselineAlignmentToggle,
 };
 

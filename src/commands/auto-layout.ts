@@ -1,46 +1,40 @@
-import { setNumericValue } from "../utils";
+import { setNumericValue } from '../utils';
 
 export const autoLayoutDirectionToggle: Command = (node) => {
 	if ('layoutMode' in node) {
-		if (node.layoutMode === 'VERTICAL') node.layoutMode = 'HORIZONTAL';
-		else node.layoutMode = 'VERTICAL';
+		node.layoutMode = node.layoutMode === 'VERTICAL' ? 'HORIZONTAL' : 'VERTICAL';
 	}
 };
 
 export const autoLayoutSpacingBetweenItems: Command<{ pixels: string }> = (node, { pixels }) => {
-	if ('itemSpacing' in node) setNumericValue(node, 'itemSpacing', pixels);
-};
-
-export const autoLayoutSpacingModeSpaceBetween: Command = (node) => {
-	if ('primaryAxisAlignItems' in node) node.primaryAxisAlignItems = 'SPACE_BETWEEN';
-};
-export const autoLayoutSpacingModePacked: Command = (node) => {
-	if ('primaryAxisAlignItems' in node) {
-		if (node.primaryAxisAlignItems !== 'SPACE_BETWEEN') return;
-		node.primaryAxisAlignItems = 'MIN';
+	if ('itemSpacing' in node) {
+		setNumericValue(node, 'itemSpacing', pixels);
 	}
 };
-export const autoLayoutStrokesExcluded: Command = (node) => {
-	if ('strokesIncludedInLayout' in node) node.strokesIncludedInLayout = false;
+
+export const autoLayoutSpacingModeToggle: Command = (node) => {
+	if ('primaryAxisAlignItems' in node) {
+		// TODO: save node's non SPACE_BETWEEN value to return to?
+		node.primaryAxisAlignItems = node.primaryAxisAlignItems !== 'SPACE_BETWEEN' ? 'SPACE_BETWEEN' : 'MIN';
+	}
 };
-export const autoLayoutStrokesIncluded: Command = (node) => {
-	if ('strokesIncludedInLayout' in node) node.strokesIncludedInLayout = true;
+
+export const autoLayoutStrokesToggle: Command = (node) => {
+	if ('strokesIncludedInLayout' in node) {
+		node.strokesIncludedInLayout = !node.strokesIncludedInLayout;
+	}
 };
-export const autoLayoutCanvasStackingLast: Command = (node) => {
-	if ('itemReverseZIndex' in node) node.itemReverseZIndex = false;
+
+export const autoLayoutCanvasStackingToggle: Command = (node) => {
+	if ('itemReverseZIndex' in node) {
+		node.itemReverseZIndex = !node.itemReverseZIndex;
+	}
 };
-export const autoLayoutCanvasStackingFirst: Command = (node) => {
-	if ('itemReverseZIndex' in node) node.itemReverseZIndex = true;
-};
+
 export const autoLayoutTextBaselineAlignmentToggle: Command = (node) => {
 	if ('layoutMode' in node && node.layoutMode === 'HORIZONTAL') {
-		if (node.counterAxisAlignItems !== 'BASELINE') {
-			node.counterAxisAlignItems = 'BASELINE';
-			figma.notify('Auto Layout > Text Baseline Alignment: On');
-		} else {
-			// node.counterAxisAlignItems = 'CENTER';
-			figma.notify('Auto Layout > Text Baseline Alignment: Off');
-		}
+		// TODO: save node's non BASELINE value to return to?
+		node.counterAxisAlignItems = node.counterAxisAlignItems !== 'BASELINE' ? 'BASELINE' : 'CENTER';
 	} else {
 		figma.notify('Auto Layout > Text Baseline Alignment: Only applicable for horizontal layout');
 	}
