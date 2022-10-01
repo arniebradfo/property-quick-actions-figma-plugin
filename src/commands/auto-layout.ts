@@ -6,12 +6,6 @@ export const autoLayoutDirectionToggle: Command = (node) => {
 	}
 };
 
-export const autoLayoutSpacingBetweenItems: Command<{ pixels: string }> = (node, { pixels }) => {
-	if ('itemSpacing' in node) {
-		setNumericValue(node, 'itemSpacing', pixels);
-	}
-};
-
 export const autoLayoutSpacingModeToggle: Command = (node) => {
 	if ('primaryAxisAlignItems' in node) {
 		// TODO: save node's non SPACE_BETWEEN value to return to?
@@ -37,5 +31,24 @@ export const autoLayoutTextBaselineAlignmentToggle: Command = (node) => {
 		node.counterAxisAlignItems = node.counterAxisAlignItems !== 'BASELINE' ? 'BASELINE' : 'CENTER';
 	} else {
 		figma.notify('Auto Layout > Text Baseline Alignment: Only applicable for horizontal layout');
+	}
+};
+
+export const autoLayoutSpacingBetweenItems: Command<{ pixels: string }> = (node, { pixels }) => {
+	if ('itemSpacing' in node) {
+		setNumericValue(node, 'itemSpacing', pixels);
+	}
+};
+
+export const autoLayoutPadding: Command<{ padding: string }> = (node, { padding }) => {
+	if ('paddingTop' in node) {
+		const paddingArray = padding
+			.replace(',', '')
+			.split(' ')
+			.map((s) => parseFloat(s));
+		node.paddingTop = paddingArray[0];
+		node.paddingRight = paddingArray[1];
+		node.paddingBottom = paddingArray[2];
+		node.paddingLeft = paddingArray[3];
 	}
 };

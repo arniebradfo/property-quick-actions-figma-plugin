@@ -1,12 +1,13 @@
 import {
-	autoLayoutDirectionToggle,
-	autoLayoutSpacingBetweenItems,
-	autoLayoutTextBaselineAlignmentToggle,
-	autoLayoutSpacingModeToggle,
 	autoLayoutCanvasStackingToggle,
+	autoLayoutDirectionToggle,
+	autoLayoutPadding,
+	autoLayoutSpacingBetweenItems,
+	autoLayoutSpacingModeToggle,
 	autoLayoutStrokesToggle,
+	autoLayoutTextBaselineAlignmentToggle,
 } from './commands/auto-layout';
-import { searchSuggestions, validateFloat } from './utils';
+import { searchSuggestions, validateFloat, validatePadding } from './utils';
 
 figma.on('run', (event: RunEvent) => {
 	console.log(figma.currentPage.selection[0]);
@@ -30,15 +31,17 @@ figma.parameters.on('input', ({ parameters, key, query, result }: ParameterInput
 });
 
 const commandMap = {
-	autoLayoutSpacingBetweenItems,
 	autoLayoutDirectionToggle,
 	autoLayoutSpacingModeToggle,
 	autoLayoutStrokesToggle,
 	autoLayoutCanvasStackingToggle,
 	autoLayoutTextBaselineAlignmentToggle,
+	autoLayoutSpacingBetweenItems,
+	autoLayoutPadding,
 };
 
 const suggestionsMap: Record<string, string[] | CreateSuggestions | undefined> = {
 	pixels: validateFloat,
+	padding: validatePadding,
 	example: ['put', 'suggestions', 'here'],
 };

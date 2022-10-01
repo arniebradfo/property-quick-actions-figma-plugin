@@ -22,3 +22,21 @@ export const searchSuggestions: GetSuggestions = (query = '', options = []) => {
 	// TODO: fuzzy find
 	return options.filter((s) => s.includes(query));
 };
+
+export const validatePadding: CreateSuggestions = (query = '') => {
+	const sides = query
+		.replace(',', ' ')
+		.split(' ')
+		.filter((s) => s !== '')
+		.map((s) => parseFloat(s))
+		.filter((n) => !isNaN(n));
+	if (sides.length === 0)
+		return '1-4 numbers, space or comma separated'
+	const padding = [
+		sides[0],
+		sides[1] || sides[0],
+		sides[2] || sides[0],
+		sides[3] || sides[1] ||  sides[0],
+	]
+	return [padding.join(', ')];
+};
