@@ -24,10 +24,8 @@ figma.parameters.on('input', ({ parameters, key, query, result }: ParameterInput
 	const suggest = suggestionsMap[key];
 	if (suggest == null) return; // assume "allowFreeform": true
 	const suggestions = typeof suggest === 'function' ? suggest(query) : searchSuggestions(query, suggest);
-	if (typeof suggestions === 'string') {
-		// if (query === '') return; // no input, no error // but sets loading state...
-		result.setError(suggestions);
-	} else result.setSuggestions(suggestions);
+	if (typeof suggestions === 'string') result.setError(suggestions);
+	else result.setSuggestions(suggestions);
 });
 
 const commandMap = {
@@ -44,15 +42,5 @@ const commandMap = {
 const suggestionsMap: Record<string, string[] | CreateSuggestions | undefined> = {
 	pixels: validateFloat,
 	padding: validatePadding,
-	alignment: [
-		'Top',
-		'Right',
-		'Bottom',
-		'Left',
-		'Center',
-		'Top left',
-		'Top right',
-		'Bottom left',
-		'Bottom right'
-	],
+	alignment: ['Top', 'Right', 'Bottom', 'Left', 'Center', 'Top left', 'Top right', 'Bottom left', 'Bottom right'],
 };

@@ -75,16 +75,18 @@ export const autoLayoutAlignment: Command<{ alignment: string }> = (node, { alig
 		node.counterAxisAlignItems = setAlignment(align.left, align.right, node.counterAxisAlignItems) as CounterAlign;
 	}
 };
-const setAlignment = (min: boolean, max: boolean, special: PrimaryAlign | CounterAlign): PrimaryAlign | CounterAlign =>
-	min
-		? 'MIN'
-		: max
-		? 'MAX'
-		: special === 'BASELINE'
-		? 'BASELINE'
-		: special === 'SPACE_BETWEEN'
-		? 'SPACE_BETWEEN'
-		: 'CENTER';
+
+const setAlignment = (
+	min: boolean,
+	max: boolean,
+	special: PrimaryAlign | CounterAlign
+): PrimaryAlign | CounterAlign => {
+	if (min) return 'MIN';
+	if (max) return 'MAX';
+	if (special === 'BASELINE') return 'BASELINE';
+	if (special === 'SPACE_BETWEEN') return 'SPACE_BETWEEN';
+	else return 'CENTER';
+};
 
 type PrimaryAlign = BaseFrameMixin['primaryAxisAlignItems'];
 type CounterAlign = BaseFrameMixin['counterAxisAlignItems'];
