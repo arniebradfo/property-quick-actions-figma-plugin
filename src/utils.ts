@@ -1,3 +1,5 @@
+import * as fuzzy from 'fuzzy';
+
 export const setNumericValue = <Node extends SceneNode>(node: Node, numericProperty: keyof Node, value: string) => {
 	if (numericProperty in node) {
 		const pixels = parseFloat(value);
@@ -19,8 +21,9 @@ export const validateFloat: CreateSuggestions = (query = '') => {
 };
 
 export const searchSuggestions: GetSuggestions = (query = '', options = []) => {
-	// TODO: fuzzy find
-	return options.filter((s) => s.includes(query));
+	const matches = fuzzy.filter(query, options).map((el) => el.string);
+	return matches;
+	// return options.filter((s) => s.toLowerCase().includes(query.toLowerCase()));
 };
 
 export const validatePadding: CreateSuggestions = (query = '') => {
@@ -30,13 +33,7 @@ export const validatePadding: CreateSuggestions = (query = '') => {
 		.filter((s) => s !== '')
 		.map((s) => parseFloat(s))
 		.filter((n) => !isNaN(n));
-	if (sides.length === 0)
-		return '1-4 numbers, space or comma separated'
-	const padding = [
-		sides[0],
-		sides[1] || sides[0],
-		sides[2] || sides[0],
-		sides[3] || sides[1] ||  sides[0],
-	]
+	if (sides.length === 0) return '1-4 numbers, space or comma separated';
+	const padding = [sides[0], sides[1] || sides[0], sides[2] || sides[0], sides[3] || sides[1] || sides[0]];
 	return [padding.join(', ')];
 };

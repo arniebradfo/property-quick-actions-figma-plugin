@@ -52,3 +52,39 @@ export const autoLayoutPadding: Command<{ padding: string }> = (node, { padding 
 		node.paddingLeft = paddingArray[3];
 	}
 };
+
+export const autoLayoutAlignment: Command<{ alignment: string }> = (node, { alignment }) => {
+	if (!('layoutMode' in node)) return;
+	const isAlignedTo = (position: string) => alignment.toLowerCase().includes(position.toLocaleLowerCase());
+	const align = {
+		top: isAlignedTo('top'),
+		right: isAlignedTo('right'),
+		bottom: isAlignedTo('bottom'),
+		left: isAlignedTo('left'),
+		center: isAlignedTo('center'),
+	};
+	// TODO: offer dynamic options based on BASELINE or SPACE_BETWEEN being set?
+	if (align.center) {
+		node.counterAxisAlignItems = 'CENTER';
+		node.primaryAxisAlignItems = 'CENTER';
+	} else if (node.layoutMode === 'HORIZONTAL') {
+		node.primaryAxisAlignItems = setAlignment(align.left, align.right, node.primaryAxisAlignItems) as PrimaryAlign;
+		node.counterAxisAlignItems = setAlignment(align.top, align.bottom, node.counterAxisAlignItems) as CounterAlign;
+	} else {
+		node.primaryAxisAlignItems = setAlignment(align.top, align.bottom, node.primaryAxisAlignItems) as PrimaryAlign;
+		node.counterAxisAlignItems = setAlignment(align.left, align.right, node.counterAxisAlignItems) as CounterAlign;
+	}
+};
+const setAlignment = (min: boolean, max: boolean, special: PrimaryAlign | CounterAlign): PrimaryAlign | CounterAlign =>
+	min
+		? 'MIN'
+		: max
+		? 'MAX'
+		: special === 'BASELINE'
+		? 'BASELINE'
+		: special === 'SPACE_BETWEEN'
+		? 'SPACE_BETWEEN'
+		: 'CENTER';
+
+type PrimaryAlign = BaseFrameMixin['primaryAxisAlignItems'];
+type CounterAlign = BaseFrameMixin['counterAxisAlignItems'];

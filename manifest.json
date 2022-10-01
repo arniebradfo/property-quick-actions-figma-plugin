@@ -23,9 +23,18 @@
 					"command": "autoLayoutPadding",
 					"parameters": [
 						{
-							"name": "List of Pixel Values",
-							"key": "padding",
-							"description": "[ All ]  or  [ V, H ]  or  [ T, H, B ]  or  [ T, R, B, L ]"
+							"name": "Top, Right, Bottom, Left",
+							"key": "padding"
+						}
+					]
+				},
+				{
+					"name": "Alignment",
+					"command": "autoLayoutAlignment",
+					"parameters": [
+						{
+							"name": "Top, Right, Bottom, Left, Center",
+							"key": "alignment"
 						}
 					]
 				},

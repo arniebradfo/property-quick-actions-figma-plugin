@@ -1,4 +1,5 @@
 import {
+	autoLayoutAlignment,
 	autoLayoutCanvasStackingToggle,
 	autoLayoutDirectionToggle,
 	autoLayoutPadding,
@@ -16,11 +17,10 @@ figma.on('run', (event: RunEvent) => {
 	const parameters = event.parameters as any; //
 
 	figma.currentPage.selection.forEach((node) => commandMap[command](node, parameters));
-	figma.closePlugin();
+	// figma.closePlugin();
 });
 
 figma.parameters.on('input', ({ parameters, key, query, result }: ParameterInputEvent) => {
-	console.log({ parameters, key, query, result });
 	const suggest = suggestionsMap[key];
 	if (suggest == null) return; // assume "allowFreeform": true
 	const suggestions = typeof suggest === 'function' ? suggest(query) : searchSuggestions(query, suggest);
@@ -38,10 +38,21 @@ const commandMap = {
 	autoLayoutTextBaselineAlignmentToggle,
 	autoLayoutSpacingBetweenItems,
 	autoLayoutPadding,
+	autoLayoutAlignment,
 };
 
 const suggestionsMap: Record<string, string[] | CreateSuggestions | undefined> = {
 	pixels: validateFloat,
 	padding: validatePadding,
-	example: ['put', 'suggestions', 'here'],
+	alignment: [
+		'Top',
+		'Right',
+		'Bottom',
+		'Left',
+		'Center',
+		'Top left',
+		'Top right',
+		'Bottom left',
+		'Bottom right'
+	],
 };
