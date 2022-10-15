@@ -1,31 +1,31 @@
 import { setNumericValue } from '../utils';
 
-export const autoLayoutDirectionToggle: Command = (node) => {
+const autoLayoutDirectionToggle: Command = (node) => {
 	if ('layoutMode' in node) {
 		node.layoutMode = node.layoutMode === 'VERTICAL' ? 'HORIZONTAL' : 'VERTICAL';
 	}
 };
 
-export const autoLayoutSpacingModeToggle: Command = (node) => {
+const autoLayoutSpacingModeToggle: Command = (node) => {
 	if ('primaryAxisAlignItems' in node) {
 		// TODO: save node's non SPACE_BETWEEN value to return to?
 		node.primaryAxisAlignItems = node.primaryAxisAlignItems !== 'SPACE_BETWEEN' ? 'SPACE_BETWEEN' : 'MIN';
 	}
 };
 
-export const autoLayoutStrokesToggle: Command = (node) => {
+const autoLayoutStrokesToggle: Command = (node) => {
 	if ('strokesIncludedInLayout' in node) {
 		node.strokesIncludedInLayout = !node.strokesIncludedInLayout;
 	}
 };
 
-export const autoLayoutCanvasStackingToggle: Command = (node) => {
+const autoLayoutCanvasStackingToggle: Command = (node) => {
 	if ('itemReverseZIndex' in node) {
 		node.itemReverseZIndex = !node.itemReverseZIndex;
 	}
 };
 
-export const autoLayoutTextBaselineAlignmentToggle: Command = (node) => {
+const autoLayoutTextBaselineAlignmentToggle: Command = (node) => {
 	if ('layoutMode' in node && node.layoutMode === 'HORIZONTAL') {
 		// TODO: save node's non BASELINE value to return to?
 		node.counterAxisAlignItems = node.counterAxisAlignItems !== 'BASELINE' ? 'BASELINE' : 'CENTER';
@@ -34,13 +34,13 @@ export const autoLayoutTextBaselineAlignmentToggle: Command = (node) => {
 	}
 };
 
-export const autoLayoutSpacingBetweenItems: Command<{ pixels: string }> = (node, { pixels }) => {
+const autoLayoutSpacingBetweenItems: Command<{ pixels: string }> = (node, { pixels }) => {
 	if ('itemSpacing' in node) {
 		setNumericValue(node, 'itemSpacing', pixels);
 	}
 };
 
-export const autoLayoutPadding: Command<{ padding: string }> = (node, { padding }) => {
+const autoLayoutPadding: Command<{ padding: string }> = (node, { padding }) => {
 	if ('paddingTop' in node) {
 		const paddingArray = padding
 			.replace(',', '')
@@ -53,7 +53,7 @@ export const autoLayoutPadding: Command<{ padding: string }> = (node, { padding 
 	}
 };
 
-export const autoLayoutAlignment: Command<{ alignment: string }> = (node, { alignment }) => {
+const autoLayoutAlignment: Command<{ alignment: string }> = (node, { alignment }) => {
 	if (!('layoutMode' in node)) return;
 	const isAlignedTo = (position: string) => alignment.toLowerCase().includes(position.toLocaleLowerCase());
 	const align = {
@@ -90,3 +90,15 @@ const setAlignment = (
 
 type PrimaryAlign = BaseFrameMixin['primaryAxisAlignItems'];
 type CounterAlign = BaseFrameMixin['counterAxisAlignItems'];
+
+
+export const autoLayoutCommandMap = {
+	autoLayoutDirectionToggle,
+	autoLayoutSpacingModeToggle,
+	autoLayoutStrokesToggle,
+	autoLayoutCanvasStackingToggle,
+	autoLayoutTextBaselineAlignmentToggle,
+	autoLayoutSpacingBetweenItems,
+	autoLayoutPadding,
+	autoLayoutAlignment,
+};
