@@ -118,7 +118,7 @@
 		{
 			"name": "Overflow Scrolling",
 			"command": "overflowScrolling",
-			"parameters": [{ "name": "...", "key": "overflowScrolling" }]
+			"parameters": [{ "name": "...", "key": "scrollingMode" }]
 		},
 		{
 			"name": "Layer Blend Mode",
@@ -147,6 +147,7 @@
 				{ "name": "Side", "command": "strokeSide", "parameters": [{ "name": "...", "key": "strokeSideMode" }] },
 				{ "name": "Join", "command": "strokeJoin", "parameters": [{ "name": "...", "key": "strokeJoinMode" }] },
 				{ "separator": true },
+				{ "name": "Dash ↔ Solid", "command": "strokeDashSolidToggle" },
 				{ "name": "Dashes", "command": "strokeDashes", "parameters": [{ "name": "...", "key": "dashArray" }] },
 				{ "name": "Dash Cap", "command": "strokeDashCap", "parameters": [{ "name": "...", "key": "dashCap" }] },
 				{ "separator": true },

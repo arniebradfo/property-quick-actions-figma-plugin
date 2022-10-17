@@ -1,8 +1,8 @@
 import { autoLayoutCommandMap, autoLayoutSuggestionsMap } from './commands/auto-layout';
-import { constraintsCommandMap } from './commands/constraints';
-import { extrasCommandMap } from './commands/extras';
-import { frameCommandMap } from './commands/frame';
-import { strokeCommandMap } from './commands/stroke';
+import { constraintsCommandMap, constraintsSuggestionsMap } from './commands/constraints';
+import { extrasCommandMap, extrasSuggestionsMap } from './commands/extras';
+import { frameCommandMap, frameSuggestionsMap } from './commands/frame';
+import { strokeCommandMap, strokeSuggestionsMap } from './commands/stroke';
 import { searchSuggestions } from './utils';
 
 figma.on('run', (event: RunEvent) => {
@@ -34,4 +34,9 @@ const commandMap = {
 
 const suggestionsMap: SuggestionsMap = {
 	...autoLayoutSuggestionsMap,
+	...constraintsSuggestionsMap,
+	...extrasSuggestionsMap,
+	...frameSuggestionsMap,
+	// ...setStyleSuggestionsMap, // later
+	...strokeSuggestionsMap
 };

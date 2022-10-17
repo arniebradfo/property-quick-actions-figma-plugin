@@ -1,28 +1,35 @@
-const setFillStyle: Command<{ colorStyle: 'string' }> = (node) => {
+const setFillStyle: Command<{ colorStyle: string }> = (node, { colorStyle }) => {
 	if ('absoluteTransform' in node) {
 		console.log('setFillStyle not implemented');
 	}
 };
-const setStrokeStyle: Command<{ colorStyle: 'string' }> = (node) => {
+const setStrokeStyle: Command<{ colorStyle: string }> = (node, { colorStyle }) => {
 	if ('absoluteTransform' in node) {
 		console.log('setStrokeStyle not implemented');
 	}
 };
-const setTextStyle: Command<{ textStyle: 'string' }> = (node) => {
+const setTextStyle: Command<{ textStyle: string }> = (node, { textStyle }) => {
 	if ('absoluteTransform' in node) {
 		console.log('setTextStyle not implemented');
 	}
 };
-const setEffectStyle: Command<{ effectStyle: 'string' }> = (node) => {
+const setEffectStyle: Command<{ effectStyle: string }> = (node, { effectStyle }) => {
 	if ('absoluteTransform' in node) {
 		console.log('setEffectStyle not implemented');
 	}
 };
-const setGridStyle: Command<{ colorStyle: 'gridStyle' }> = (node) => {
+const setGridStyle: Command<{ gridStyle: string }> = (node, { gridStyle }) => {
 	if ('absoluteTransform' in node) {
 		console.log('setGridStyle not implemented');
 	}
 };
+
+export const setStyleSuggestionsMap: SuggestionsMap = {
+	colorStyle: undefined,
+	textStyle: undefined,
+	effectStyle: undefined,
+	gridStyle: undefined,
+}
 
 export const setStyleCommandMap = {
 	setFillStyle,
