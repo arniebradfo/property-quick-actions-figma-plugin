@@ -1,4 +1,8 @@
 import { autoLayoutCommandMap } from './commands/auto-layout';
+import { constraintsCommandMap } from './commands/constraints';
+import { extrasCommandMap } from './commands/extras';
+import { frameCommandMap } from './commands/frame';
+import { strokeCommandMap } from './commands/stroke';
 import { searchSuggestions, validateFloat, validatePadding } from './utils';
 
 figma.on('run', (event: RunEvent) => {
@@ -21,6 +25,11 @@ figma.parameters.on('input', ({ parameters, key, query, result }: ParameterInput
 
 const commandMap = {
 	...autoLayoutCommandMap,
+	...constraintsCommandMap,
+	...extrasCommandMap,
+	...frameCommandMap,
+	// ...setStyleCommandMap, // later
+	...strokeCommandMap
 };
 
 const suggestionsMap: Record<string, string[] | CreateSuggestions | undefined> = {

@@ -29,12 +29,16 @@ Options
   - Vertical/Horizontal - [Left, Right, Stretch, Center, Scale]
   - Fix position when scrolling - boolean
 - Overflow Scrolling - [Horizontal, Vertical, Both, None]
-- Fill
-  - ? Set style - Select Color Style
 - Layer
   - Blend mode  - [BlendMode... ]
+- Set Style
+  - Fill
+  - Stroke
+  - Text
+  - Effect
+  - Grid
+  - Any
 - Stroke    
-  - ? Set style - Select Color Style
   - Stroke align: [Center, Inside, Outside]
   - Stroke weight - [number, ...]
   - Strokes per side - [Top, Right, Bottom, Left, All]

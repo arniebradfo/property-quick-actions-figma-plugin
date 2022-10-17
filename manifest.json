@@ -58,8 +58,110 @@
 				{
 					"name": "Text Baseline Alignment: On ↔ Off",
 					"command": "autoLayoutTextBaselineAlignmentToggle"
+				}
+			]
+		},
+		{
+			"name": "Frame",
+			"menu": [
+				{ "name": "Position: X, Y", "command": "framePositionXY", "parameters": [{ "name": "x y", "key": "xy" }] },
+				{
+					"name": "Size: Height, Width",
+					"command": "frameSizeHeightWidth",
+					"parameters": [{ "name": "height width", "key": "xy" }]
 				},
-				{ "separator": true }
+				{ "separator": true },
+				{
+					"name": "Rotation",
+					"command": "frameRotation",
+					"parameters": [{ "name": "Degrees°", "key": "degrees" }]
+				},
+				{
+					"name": "Corner Radius",
+					"command": "frameCornerRadius",
+					"parameters": [{ "name": "TopLeft, TopRight, BottomRight, BottomLeft", "key": "radius" }]
+				},
+				{ "separator": true },
+				{
+					"name": "Horizontal Resizing",
+					"command": "frameHorizontalResizing",
+					"parameters": [{ "name": "...", "key": "resizing" }]
+				},
+				{
+					"name": "Vertical Resizing",
+					"command": "frameVerticalResizing",
+					"parameters": [{ "name": "...", "key": "resizing" }]
+				},
+				{ "separator": true },
+				{ "name": "Clip Content: On ↔ Off", "command": "frameClipContentToggle" },
+				{ "name": "Constrain Proportions: On ↔ Off", "command": "frameConstrainProportionsToggle" },
+				{ "name": "Absolute Position: On ↔ Off", "command": "frameAbsolutePositionToggle" }
+			]
+		},
+		{
+			"name": "Constraints",
+			"menu": [
+				{
+					"name": "Vertical",
+					"command": "constraintsVertical",
+					"parameters": [{ "name": "...", "key": "constraints" }]
+				},
+				{
+					"name": "Horizontal",
+					"command": "constraintsHorizontal",
+					"parameters": [{ "name": "...", "key": "constraints" }]
+				},
+				{ "separator": true },
+				{ "name": "Fix position when scrolling: On ↔ Off", "command": "constraintsFixPositionToggle" }
+			]
+		},
+		{
+			"name": "Overflow Scrolling",
+			"command": "overflowScrolling",
+			"parameters": [{ "name": "...", "key": "overflowScrolling" }]
+		},
+		{
+			"name": "Layer Blend Mode",
+			"command": "layerBlendMode",
+			"parameters": [{ "name": "...", "key": "blendMode" }]
+		},
+		{
+			"name": "Image Scale Mode",
+			"command": "imageScaleMode",
+			"parameters": [{ "name": "...", "key": "scaleMode" }]
+		},
+		{
+			"name": "Text Resizing",
+			"command": "textResizing",
+			"parameters": [{ "name": "...", "key": "textResizingMode" }]
+		},
+		{
+			"name": "Stroke",
+			"menu": [
+				{ "name": "Align", "command": "strokeAlign", "parameters": [{ "name": "...", "key": "strokeAlignMode" }] },
+				{
+					"name": "Weight",
+					"command": "strokeWeight",
+					"parameters": [{ "name": "Top, Right, Bottom, Left", "key": "padding" }]
+				},
+				{ "name": "Side", "command": "strokeSide", "parameters": [{ "name": "...", "key": "strokeSideMode" }] },
+				{ "name": "Join", "command": "strokeJoin", "parameters": [{ "name": "...", "key": "strokeJoinMode" }] },
+				{ "separator": true },
+				{ "name": "Dashes", "command": "strokeDashes", "parameters": [{ "name": "...", "key": "dashArray" }] },
+				{ "name": "Dash Cap", "command": "strokeDashCap", "parameters": [{ "name": "...", "key": "dashCap" }] },
+				{ "separator": true },
+				{
+					"name": "Both Endpoints",
+					"command": "strokeBothEndpoints",
+					"parameters": [{ "name": "...", "key": "strokeCap" }]
+				},
+				{
+					"name": "Start point",
+					"command": "strokeStartpoint",
+					"parameters": [{ "name": "...", "key": "strokeCap" }]
+				},
+				{ "name": "End point", "command": "strokeEndpoint", "parameters": [{ "name": "...", "key": "strokeCap" }] },
+				{ "name": "Swap start and end points", "command": "strokeSwapStartpointAndEndpoint" }
 			]
 		}
 	]
