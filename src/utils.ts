@@ -20,8 +20,8 @@ export const validateFloat: CreateSuggestions = (query = '') => {
 	else return [float.toString()];
 };
 
-export const searchSuggestions: GetSuggestions = (query = '', options = []) => {
-	const matches = fuzzy.filter(query, options).map((el) => el.string);
+export const searchSuggestions: GetSuggestions = (query = '', options = [] ) => {
+	const matches = fuzzy.filter(query, options as string[]).map((el) => el.string);
 	return matches;
 	// return options.filter((s) => s.toLowerCase().includes(query.toLowerCase()));
 };

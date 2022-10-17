@@ -1,9 +1,9 @@
-import { autoLayoutCommandMap } from './commands/auto-layout';
+import { autoLayoutCommandMap, autoLayoutSuggestionsMap } from './commands/auto-layout';
 import { constraintsCommandMap } from './commands/constraints';
 import { extrasCommandMap } from './commands/extras';
 import { frameCommandMap } from './commands/frame';
 import { strokeCommandMap } from './commands/stroke';
-import { searchSuggestions, validateFloat, validatePadding } from './utils';
+import { searchSuggestions } from './utils';
 
 figma.on('run', (event: RunEvent) => {
 	console.log(figma.currentPage.selection[0]);
@@ -29,11 +29,9 @@ const commandMap = {
 	...extrasCommandMap,
 	...frameCommandMap,
 	// ...setStyleCommandMap, // later
-	...strokeCommandMap
+	...strokeCommandMap,
 };
 
-const suggestionsMap: Record<string, string[] | CreateSuggestions | undefined> = {
-	pixels: validateFloat,
-	padding: validatePadding,
-	alignment: ['Top', 'Right', 'Bottom', 'Left', 'Center', 'Top left', 'Top right', 'Bottom left', 'Bottom right'],
+const suggestionsMap: SuggestionsMap = {
+	...autoLayoutSuggestionsMap,
 };

@@ -1,4 +1,4 @@
-import { setNumericValue } from '../utils';
+import { setNumericValue, validateFloat, validatePadding } from '../utils';
 
 const autoLayoutDirectionToggle: Command = (node) => {
 	if ('layoutMode' in node) {
@@ -53,7 +53,10 @@ const autoLayoutPadding: Command<{ padding: string }> = (node, { padding }) => {
 	}
 };
 
-const autoLayoutAlignment: Command<{ alignment: string }> = (node, { alignment }) => {
+const alignmentSuggestions = ['Top', 'Right', 'Bottom', 'Left', 'Center', 'Top left', 'Top right', 'Bottom left', 'Bottom right'] as const;
+type AlignmentSuggestions = typeof alignmentSuggestions[number]
+
+const autoLayoutAlignment: Command<{ alignment: AlignmentSuggestions }> = (node, { alignment }) => {
 	if (!('layoutMode' in node)) return;
 	const isAlignedTo = (position: string) => alignment.toLowerCase().includes(position.toLocaleLowerCase());
 	const align = {
@@ -91,6 +94,11 @@ const setAlignment = (
 type PrimaryAlign = BaseFrameMixin['primaryAxisAlignItems'];
 type CounterAlign = BaseFrameMixin['counterAxisAlignItems'];
 
+export const autoLayoutSuggestionsMap: SuggestionsMap = {
+	pixels: validateFloat,
+	padding: validatePadding,
+	alignment: alignmentSuggestions,
+}
 
 export const autoLayoutCommandMap = {
 	autoLayoutDirectionToggle,
