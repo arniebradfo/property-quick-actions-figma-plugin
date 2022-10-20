@@ -40,8 +40,8 @@ const frameClipContentToggle: Command = (node) => {
 	}
 };
 const frameConstrainProportionsToggle: Command = (node) => {
-	if ('absoluteTransform' in node) {
-		console.log('frameConstrainProportionsToggle not implemented');
+	if ('constrainProportions' in node) {
+		node.constrainProportions = !node.constrainProportions;
 	}
 };
 const frameAbsolutePositionToggle: Command = (node) => {
