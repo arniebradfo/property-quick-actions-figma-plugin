@@ -12,7 +12,7 @@ figma.on('run', (event: RunEvent) => {
 	const parameters = event.parameters as any; //
 
 	figma.currentPage.selection.forEach((node) => commandMap[command](node, parameters));
-	figma.closePlugin();
+	// figma.closePlugin();
 });
 
 figma.parameters.on('input', ({ parameters, key, query, result }: ParameterInputEvent) => {

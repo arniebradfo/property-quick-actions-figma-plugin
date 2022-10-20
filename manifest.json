@@ -104,12 +104,12 @@
 				{
 					"name": "Vertical",
 					"command": "constraintsVertical",
-					"parameters": [{ "name": "...", "key": "constraints" }]
+					"parameters": [{ "name": "...", "key": "constraintsVertical" }]
 				},
 				{
 					"name": "Horizontal",
 					"command": "constraintsHorizontal",
-					"parameters": [{ "name": "...", "key": "constraints" }]
+					"parameters": [{ "name": "...", "key": "constraintsHorizontal" }]
 				},
 				{ "separator": true },
 				{ "name": "Fix position when scrolling: On ↔ Off", "command": "constraintsFixPositionToggle" }
