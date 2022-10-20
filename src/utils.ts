@@ -20,7 +20,7 @@ export const validateFloat: CreateSuggestions = (query = '') => {
 	else return [float.toString()];
 };
 
-export const searchSuggestions: GetSuggestions = (query = '', options = [] ) => {
+export const searchSuggestions: GetSuggestions = (query = '', options = []) => {
 	const matches = fuzzy.filter(query, options as string[]).map((el) => el.string);
 	return matches;
 	// return options.filter((s) => s.toLowerCase().includes(query.toLowerCase()));
@@ -37,3 +37,6 @@ export const validatePadding: CreateSuggestions = (query = '') => {
 	const padding = [sides[0], sides[1] || sides[0], sides[2] || sides[0], sides[3] || sides[1] || sides[0]];
 	return [padding.join(', ')];
 };
+
+export const toScreamingSnakeCase = (str: string) =>
+	str.replace(/[A-Z]/gi, (l) => l.toUpperCase()).replace(/\s/gi, '_');

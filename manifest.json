@@ -131,11 +131,6 @@
 			"parameters": [{ "name": "...", "key": "scaleMode" }]
 		},
 		{
-			"name": "Text Resizing",
-			"command": "textResizing",
-			"parameters": [{ "name": "...", "key": "textResizingMode" }]
-		},
-		{
 			"name": "Stroke",
 			"menu": [
 				{ "name": "Align", "command": "strokeAlign", "parameters": [{ "name": "...", "key": "strokeAlignMode" }] },
