@@ -1,4 +1,12 @@
-import { validateXY } from '../utils';
+import { setNumericValue, validateFloat, validatePadding, validateXY } from '../utils';
+import {
+	affineMatrixRotate,
+	affineMatrixRotateAroundPoint,
+	composeMatrices,
+	multiplyMatrices,
+	toAffineTransform,
+	toTransform,
+} from '../utils-matrix';
 
 const framePositionXY: Command<{ xy: string }> = (node, { xy }) => {
 	if ('x' in node) {
@@ -6,8 +14,8 @@ const framePositionXY: Command<{ xy: string }> = (node, { xy }) => {
 			.replace(',', '')
 			.split(' ')
 			.map((s) => parseFloat(s));
-		if (x) node.x = x;
-		if (y) node.y = y;
+		if (x != null) node.x = x;
+		if (y != null) node.y = y;
 	}
 };
 const frameSizeHeightWidth: Command<{ xy: string }> = (node, { xy }) => {
@@ -20,12 +28,40 @@ const frameSizeHeightWidth: Command<{ xy: string }> = (node, { xy }) => {
 	}
 };
 const frameRotation: Command<{ degrees: string }> = (node, { degrees }) => {
-	if ('absoluteTransform' in node) {
-		figma.notify('frameRotation not implemented');
+	if ('absoluteBoundingBox' in node && node.absoluteBoundingBox != null) {
+		// https://www.figma.com/plugin-docs/api/properties/nodes-relativetransform
+		// https://www.figma.com/plugin-docs/api/Transform
+
+		// this is WAAAYY harder that it seems
+
+		// setting node.rotation rotates around the top left.
+		// need to set node.absoluteTransform, but this has no setter...
+		// set node.relativeTransform,
+		// - but need to consider the parent the node is relative to,
+		// - and its ancestors...
+		
+		let deg = parseFloat(degrees);
+		if (isNaN(deg)) return;
+		
+		// get rotation from node.absoluteTransform
+		deg -= node.rotation;
+
+		const { x, y, height, width } = node.absoluteBoundingBox;
+		node.relativeTransform = toTransform(
+			composeMatrices([
+				toAffineTransform(node.relativeTransform),
+				affineMatrixRotateAroundPoint(deg, node.x + width / 2, node.y + height / 2),
+			])
+		);
 	}
 };
 const frameCornerRadius: Command<{ radius: string }> = (node, { radius }) => {
-	if ('absoluteTransform' in node) {
+	if ('topLeftRadius' in node) {
+		const [tl, tr, br, bl] = radius
+			.replace(',', '')
+			.split(' ')
+			.map((s) => parseFloat(s));
+		// setNumericValue(node, 'topLeftRadius', tl);
 		figma.notify('frameCornerRadius not implemented');
 	}
 };
@@ -63,8 +99,8 @@ const frameAbsolutePositionToggle: Command = (node) => {
 
 export const frameSuggestionsMap: SuggestionsMap = {
 	xy: validateXY,
-	degrees: undefined,
-	radius: undefined,
+	degrees: validateFloat,
+	radius: validatePadding,
 	resizing: resizingSuggestions,
 };
 
