@@ -796,6 +796,11 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
+transformation-matrix@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/transformation-matrix/-/transformation-matrix-2.14.0.tgz#2ee5d0c20485d068d621e1522f0aecb0d2415296"
+  integrity sha512-iG8EAVSSIXHrIMO5B9gzUGZlIOfIjRpsuNaeqpInuGWVlM52vFDdOYUbjyFE4LsUCw5GoD51/Lvpo00Whs6ecQ==
+
 ts-loader@^9.4.1:
   version "9.4.1"
   resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-9.4.1.tgz#b6f3d82db0eac5a8295994f8cb5e4940ff6b1060"
