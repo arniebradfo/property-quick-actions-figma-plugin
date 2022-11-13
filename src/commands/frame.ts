@@ -1,29 +1,6 @@
-import { setNumericValue, validateFloat, validatePadding, validateXY } from '../utils';
-import {
-	compose,
-	decomposeTSR,
-	inverse,
-	transform,
-	identity,
-	toString,
-	toSVG,
-	rotate,
-	rotateDEG,
-} from 'transformation-matrix';
-import {
-	affineMatrixRotate,
-	affineMatrixRotateAroundPoint,
-	composeMatrices,
-	currentMatrixRotation,
-	matrixToTransform,
-	multiplyMatrices,
-	rotationFromTransform,
-	toAffineTransform,
-	toDeg,
-	toRad,
-	toTransform,
-	transformToMatrix,
-} from '../utils-matrix';
+import { validateFloat, validatePadding, validateXY } from '../utils';
+import { compose, identity, inverse, rotateDEG } from 'transformation-matrix';
+import { currentMatrixRotation, matrixToTransform, toDeg, transformToMatrix } from '../utils-matrix';
 
 const framePositionXY: Command<{ xy: string }> = (node, { xy }) => {
 	if ('x' in node) {
@@ -49,46 +26,28 @@ const frameRotation: Command<{ degrees: string }> = (node, { degrees }) => {
 		let rotation = parseFloat(degrees);
 		if (isNaN(rotation)) return;
 
+		// node.rotation = rotation // thought this would be easy, but...
+		// this is WAAAYY harder that it seems
 		// https://www.figma.com/plugin-docs/api/properties/nodes-relativetransform
 		// https://www.figma.com/plugin-docs/api/Transform
 
-		// this is WAAAYY harder that it seems
+		// TODO: this doesn't work when a node has been flipped. I don't know how to fix that
 
-		// setting node.rotation rotates around the top left.
-		// need to set node.absoluteTransform, but this has no setter...
-		// set node.relativeTransform,
-		// - but need to consider the parent the node is relative to,
-		// - and its ancestors...
-
-		const nodeRotation = node.rotation;
 		const absoluteMatrix = transformToMatrix(node.absoluteTransform);
-		// const relativeMatrix = transformToMatrix(node.relativeTransform);
 		const parentAbsoluteMatrix =
 			node.parent != null && 'absoluteTransform' in node.parent && node.parent.type !== 'GROUP'
 				? transformToMatrix(node.parent.absoluteTransform)
 				: identity();
 
 		const absoluteRotation = -toDeg(currentMatrixRotation(absoluteMatrix));
-		const relativeRotation = rotation - absoluteRotation; // nodeRotation;
-
-		console.log({ rotation, absoluteRotation, relativeRotation, nodeRotation });
-
+		const relativeRotation = rotation - absoluteRotation;
 		const { x = 0, y = 0, height = 0, width = 0 } = node.absoluteBoundingBox || {};
 		const rotationMatrix = rotateDEG(-relativeRotation, x + width / 2, y + height / 2);
+
 		const newAbsoluteMatrix = compose(rotationMatrix, absoluteMatrix);
 		const newRelativeMatrix = compose(inverse(parentAbsoluteMatrix), newAbsoluteMatrix);
 
 		node.relativeTransform = matrixToTransform(newRelativeMatrix);
-
-		// const absoluteTransform =  //toTransform(
-		// node.relativeTransform = toTransform(
-		// composeMatrices([
-		// 	toAffineTransform(node.absoluteTransform),
-		// 	affineMatrixRotateAroundPoint(deg, x + width / 2, y + height / 2),
-		// ])
-		//);
-
-		// const relativeTransform = compose(absoluteTransform, inverse())
 	}
 };
 const frameCornerRadius: Command<{ radius: string }> = (node, { radius }) => {

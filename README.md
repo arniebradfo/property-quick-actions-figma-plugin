@@ -62,3 +62,7 @@ Options
   - Ratio - angle
 - Ellipse
   - Arc...
+
+
+BUGS:
+- rotate doesn't work when a node has been flipped one way
