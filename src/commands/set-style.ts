@@ -1,26 +1,26 @@
 const setFillStyle: Command<{ colorStyle: string }> = (node, { colorStyle }) => {
 	if ('absoluteTransform' in node) {
-		console.log('setFillStyle not implemented');
+		figma.notify('setFillStyle not implemented');
 	}
 };
 const setStrokeStyle: Command<{ colorStyle: string }> = (node, { colorStyle }) => {
 	if ('absoluteTransform' in node) {
-		console.log('setStrokeStyle not implemented');
+		figma.notify('setStrokeStyle not implemented');
 	}
 };
 const setTextStyle: Command<{ textStyle: string }> = (node, { textStyle }) => {
 	if ('absoluteTransform' in node) {
-		console.log('setTextStyle not implemented');
+		figma.notify('setTextStyle not implemented');
 	}
 };
 const setEffectStyle: Command<{ effectStyle: string }> = (node, { effectStyle }) => {
 	if ('absoluteTransform' in node) {
-		console.log('setEffectStyle not implemented');
+		figma.notify('setEffectStyle not implemented');
 	}
 };
 const setGridStyle: Command<{ gridStyle: string }> = (node, { gridStyle }) => {
 	if ('absoluteTransform' in node) {
-		console.log('setGridStyle not implemented');
+		figma.notify('setGridStyle not implemented');
 	}
 };
 

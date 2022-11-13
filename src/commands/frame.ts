@@ -1,21 +1,32 @@
+import { validateXY } from '../utils';
+
 const framePositionXY: Command<{ xy: string }> = (node, { xy }) => {
-	if ('absoluteTransform' in node) {
-		console.log('framePositionXY not implemented');
+	if ('x' in node) {
+		const [x, y] = xy
+			.replace(',', '')
+			.split(' ')
+			.map((s) => parseFloat(s));
+		if (x) node.x = x;
+		if (y) node.y = y;
 	}
 };
 const frameSizeHeightWidth: Command<{ xy: string }> = (node, { xy }) => {
-	if ('absoluteTransform' in node) {
-		console.log('frameSizeHeightWidth not implemented');
+	if ('resize' in node) {
+		const [w = node.width, h = node.height] = xy
+			.replace(',', '')
+			.split(' ')
+			.map((s) => parseFloat(s));
+		node.resize(w, h);
 	}
 };
 const frameRotation: Command<{ degrees: string }> = (node, { degrees }) => {
 	if ('absoluteTransform' in node) {
-		console.log('frameRotation not implemented');
+		figma.notify('frameRotation not implemented');
 	}
 };
 const frameCornerRadius: Command<{ radius: string }> = (node, { radius }) => {
 	if ('absoluteTransform' in node) {
-		console.log('frameCornerRadius not implemented');
+		figma.notify('frameCornerRadius not implemented');
 	}
 };
 
@@ -24,19 +35,19 @@ type ResizingSuggestions = typeof resizingSuggestions[number];
 
 const frameHorizontalResizing: Command<{ resizing: ResizingSuggestions }> = (node, { resizing }) => {
 	if ('absoluteTransform' in node) {
-		console.log('frameHorizontalResizing not implemented');
+		figma.notify('frameHorizontalResizing not implemented');
 	}
 };
 
 const frameVerticalResizing: Command<{ resizing: ResizingSuggestions }> = (node, { resizing }) => {
 	if ('absoluteTransform' in node) {
-		console.log('frameVerticalResizing not implemented');
+		figma.notify('frameVerticalResizing not implemented');
 	}
 };
 
 const frameClipContentToggle: Command = (node) => {
 	if ('absoluteTransform' in node) {
-		console.log('frameClipContentToggle not implemented');
+		figma.notify('frameClipContentToggle not implemented');
 	}
 };
 const frameConstrainProportionsToggle: Command = (node) => {
@@ -46,12 +57,12 @@ const frameConstrainProportionsToggle: Command = (node) => {
 };
 const frameAbsolutePositionToggle: Command = (node) => {
 	if ('absoluteTransform' in node) {
-		console.log('frameAbsolutePositionToggle not implemented');
+		figma.notify('frameAbsolutePositionToggle not implemented');
 	}
 };
 
 export const frameSuggestionsMap: SuggestionsMap = {
-	xy: undefined,
+	xy: validateXY,
 	degrees: undefined,
 	radius: undefined,
 	resizing: resizingSuggestions,

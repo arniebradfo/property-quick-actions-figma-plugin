@@ -3,13 +3,13 @@ type StrokeAlignModeSuggestions = typeof strokeAlignModeSuggestions[number];
 
 const strokeAlign: Command<{ strokeAlignMode: StrokeAlignModeSuggestions }> = (node, { strokeAlignMode }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeAlign not implemented');
+		figma.notify('strokeAlign not implemented');
 	}
 };
 
 const strokeWeight: Command<{ padding: string }> = (node, { padding }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeWeight not implemented');
+		figma.notify('strokeWeight not implemented');
 	}
 };
 
@@ -18,7 +18,7 @@ type StrokeSideModeSuggestions = typeof strokeSideModeSuggestions[number];
 
 const strokeSide: Command<{ strokeSideMode: StrokeSideModeSuggestions }> = (node, { strokeSideMode }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeSide not implemented');
+		figma.notify('strokeSide not implemented');
 	}
 };
 
@@ -27,19 +27,19 @@ type StrokeJoinModeSuggestions = typeof strokeJoinModeSuggestions[number];
 
 const strokeJoin: Command<{ strokeJoinMode: StrokeJoinModeSuggestions }> = (node, { strokeJoinMode }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeJoin not implemented');
+		figma.notify('strokeJoin not implemented');
 	}
 };
 
 const strokeDashSolidToggle: Command = (node) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeDashSolidToggle not implemented');
+		figma.notify('strokeDashSolidToggle not implemented');
 	}
 };
 
 const strokeDashes: Command<{ dashArray: string }> = (node, { dashArray }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeDashes not implemented');
+		figma.notify('strokeDashes not implemented');
 	}
 };
 
@@ -48,7 +48,7 @@ type DashCapSuggestions = typeof dashCapSuggestions[number];
 
 const strokeDashCap: Command<{ dashCap: DashCapSuggestions }> = (node, { dashCap }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeDashCap not implemented');
+		figma.notify('strokeDashCap not implemented');
 	}
 };
 
@@ -57,23 +57,23 @@ type StrokeCapSuggestions = typeof strokeCapSuggestions[number];
 
 const strokeBothEndpoints: Command<{ strokeCap: string }> = (node, { strokeCap }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeBothEndpoints not implemented');
+		figma.notify('strokeBothEndpoints not implemented');
 	}
 };
 const strokeStartpoint: Command<{ strokeCap: string }> = (node, { strokeCap }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeStartpoint not implemented');
+		figma.notify('strokeStartpoint not implemented');
 	}
 };
 const strokeEndpoint: Command<{ strokeCap: string }> = (node, { strokeCap }) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeEndpoint not implemented');
+		figma.notify('strokeEndpoint not implemented');
 	}
 };
 
 const strokeSwapStartpointAndEndpoint: Command = (node) => {
 	if ('absoluteTransform' in node) {
-		console.log('strokeSwapStartpointAndEndpoint not implemented');
+		figma.notify('strokeSwapStartpointAndEndpoint not implemented');
 	}
 };
 

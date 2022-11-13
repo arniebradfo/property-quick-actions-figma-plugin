@@ -64,7 +64,11 @@
 		{
 			"name": "Frame",
 			"menu": [
-				{ "name": "Position: X, Y", "command": "framePositionXY", "parameters": [{ "name": "x y", "key": "xy" }] },
+				{
+					"name": "Position: X, Y",
+					"command": "framePositionXY",
+					"parameters": [{ "name": "x y", "key": "xy" }]
+				},
 				{
 					"name": "Size: Height, Width",
 					"command": "frameSizeHeightWidth",
@@ -133,7 +137,11 @@
 		{
 			"name": "Stroke",
 			"menu": [
-				{ "name": "Align", "command": "strokeAlign", "parameters": [{ "name": "...", "key": "strokeAlignMode" }] },
+				{
+					"name": "Align",
+					"command": "strokeAlign",
+					"parameters": [{ "name": "...", "key": "strokeAlignMode" }]
+				},
 				{
 					"name": "Weight",
 					"command": "strokeWeight",
@@ -156,7 +164,11 @@
 					"command": "strokeStartpoint",
 					"parameters": [{ "name": "...", "key": "strokeCap" }]
 				},
-				{ "name": "End point", "command": "strokeEndpoint", "parameters": [{ "name": "...", "key": "strokeCap" }] },
+				{
+					"name": "End point",
+					"command": "strokeEndpoint",
+					"parameters": [{ "name": "...", "key": "strokeCap" }]
+				},
 				{ "name": "Swap start and end points", "command": "strokeSwapStartpointAndEndpoint" }
 			]
 		}

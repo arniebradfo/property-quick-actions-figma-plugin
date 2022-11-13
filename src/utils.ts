@@ -34,8 +34,25 @@ export const validatePadding: CreateSuggestions = (query = '') => {
 		.map((s) => parseFloat(s))
 		.filter((n) => !isNaN(n));
 	if (sides.length === 0) return '1-4 numbers, space or comma separated';
-	const padding = [sides[0], sides[1] || sides[0], sides[2] || sides[0], sides[3] || sides[1] || sides[0]];
+	const padding = [
+		sides[0], //
+		sides[1] || sides[0],
+		sides[2] || sides[0],
+		sides[3] || sides[1] || sides[0],
+	];
 	return [padding.join(', ')];
+};
+
+export const validateXY: CreateSuggestions = (query = '') => {
+	const input = query
+		.replace(',', ' ')
+		.split(' ')
+		.filter((s) => s !== '')
+		.map((s) => parseFloat(s))
+		.filter((n) => !isNaN(n));
+	if (input.length === 0) return '1 or 2 numbers, space or comma separated';
+	const xy = [input[0], input[1] || input[0]];
+	return [xy.join(', ')];
 };
 
 export const toScreamingSnakeCase = (str: string) =>
