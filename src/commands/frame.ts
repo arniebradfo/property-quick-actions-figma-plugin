@@ -17,7 +17,7 @@ const frameSizeHeightWidth: Command<{ xy: string }> = (node, { xy }) => {
 		const [w = node.width, h = node.height] = xy
 			.replace(',', '')
 			.split(' ')
-			.map((s) => parseFloat(s));
+			.map((s) => parseFloat(s) || 0);
 		node.resize(w, h);
 	}
 };
@@ -55,9 +55,15 @@ const frameCornerRadius: Command<{ radius: string }> = (node, { radius }) => {
 		const [tl, tr, br, bl] = radius
 			.replace(',', '')
 			.split(' ')
-			.map((s) => parseFloat(s));
-		// setNumericValue(node, 'topLeftRadius', tl);
-		figma.notify('frameCornerRadius not implemented');
+			.map((s) => parseFloat(s) || 0);
+		if (tr === tl && br === tl && bl === tl) {
+			node.cornerRadius = tl;
+		} else {
+			node.topLeftRadius = tl;
+			node.topRightRadius = tr;
+			node.bottomRightRadius = br;
+			node.bottomLeftRadius = bl;
+		}
 	}
 };
 
