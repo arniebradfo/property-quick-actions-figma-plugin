@@ -3,6 +3,13 @@ Add Object Property Settings to the Quick Actions toolbar for fewer clicks
 
 (Under Development)
 
+## Input Strategy
+- (Currently) all as menu items with 1 level of hierarchy
+- As two-stage quick actions under 1 level of hierarchy
+- as two-stage quick actions under no hierarchy - type cmd/ QA Enter then fuzzy find the command
+  - this will help with namespacing against all other plugins
+  - Also, this will allow adding a ui for customization?
+
 ## TODO
 Options
 - Auto Layout 
