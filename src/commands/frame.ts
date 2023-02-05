@@ -70,14 +70,44 @@ const frameCornerRadius: Command<{ radius: string }> = (node, { radius }) => {
 const resizingSuggestions = ['Fixed', 'Hug', 'Fill'] as const;
 type ResizingSuggestions = typeof resizingSuggestions[number];
 
+const setNodeResizing = (node: SceneNode, resizing: ResizingSuggestions, layoutMode: BaseFrameMixin['layoutMode'] = 'NONE') => {
+	if ('layoutMode' in node) {
+		if (node.layoutMode === 'NONE') {
+			
+		}
+		const axisSizingMode = layoutMode === node.layoutMode ? 'counterAxisSizingMode' : 'primaryAxisSizingMode';
+		if (resizing === 'Fill') {
+			node.layoutAlign = 'STRETCH'
+		} else {
+			node[axisSizingMode] = resizing === 'Hug' ? 'AUTO' : 'FIXED'
+		}
+	}
+};
+
 const frameHorizontalResizing: Command<{ resizing: ResizingSuggestions }> = (node, { resizing }) => {
-	if ('absoluteTransform' in node) {
-		figma.notify('frameHorizontalResizing not implemented');
+	if ('layoutAlign' in node) {
+		if (node.parent && 'primaryAxisSizingMode' in node.parent) {
+			// node.parent.primaryAxisSizingMode = 'FIXED'
+			// node.parent.counterAxisSizingMode = 'FIXED'
+		}
+
+		//
+		// node.primaryAxisSizingMode = 'AUTO';
+		// node.counterAxisSizingMode = 'AUTO';
+		
+		// 'Fill' // only for children of layoutMode != 'NONE'
+		node.layoutAlign = 'STRETCH';
+		node.layoutGrow = 1;
+		// need to change parent axisSizingMode also
+		
+		// figma.notify('frameHorizontalResizing not implemented');
 	}
 };
 
 const frameVerticalResizing: Command<{ resizing: ResizingSuggestions }> = (node, { resizing }) => {
-	if ('absoluteTransform' in node) {
+	if ('primaryAxisSizingMode' in node) {
+		node.primaryAxisSizingMode = 'AUTO';
+		node.counterAxisSizingMode = 'AUTO';
 		figma.notify('frameVerticalResizing not implemented');
 	}
 };
